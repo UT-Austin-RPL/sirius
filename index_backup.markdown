@@ -353,7 +353,7 @@ For the initial and final deployment stages (Round 0 and Round 3), we show a no-
 <table border="0" cellspacing="10" cellpadding="0" align="center">
   <tbody><tr>  <td align="center" valign="middle">
   <iframe width="780" height="437.84" 
-     src="https://www.youtube.com/embed/MhXEG5XS5Wk?autoplay=1&mute=1&loop=1&list=PLfnu30FB6KKE4ax5MHmxACFpuMQ21sRPC" 
+     src="https://www.youtube.com/embed/6Qycriq0Ajk?autoplay=1&mute=1&loop=1&list=PLfnu30FB6KKGi39fZVqT2oxCmZN2IIZU6" 
      autoplay="true" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </td>
   </tr>
@@ -367,7 +367,7 @@ For the initial and final deployment stages (Round 0 and Round 3), we show a no-
 <table border="0" cellspacing="10" cellpadding="0" align="center">
   <tbody><tr>  <td align="center" valign="middle">
   <iframe  width="780" height="437.84" 
-     src="https://www.youtube.com/embed/a_KU-FwcpcY?autoplay=1&mute=1&loop=1&list=PLfnu30FB6KKEaBAlsCIIDXV7k6bknRfwt"
+     src="https://www.youtube.com/embed/UBh1iFpfSzc?autoplay=1&mute=1&loop=1&list=PLfnu30FB6KKHLSdXA0Ya78ywP96mUtpcW"
      autoplay="true" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </td>
   </tr>
