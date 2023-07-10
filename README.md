@@ -102,6 +102,14 @@ source template_process_sim_dataset.sh ${data.hdf5} ${data_processed.hdf5} ${ima
 
 <br>
 
+## Acknowledgements
+
+This codebase is largely built on [robomimic](https://github.com/ARISE-Initiative/robomimic) and [robosuite](https://github.com/ARISE-Initiative/robosuite). We also thank [Ajay Mandlekar](https://ai.stanford.edu/~amandlek/) for sharing well-designed simulation task environments beyond the robomimic codebase like ```Coffee``` and ```Threading``` tasks during project development.
+
+For real-robot experiments, we used [Deoxys](https://ut-austin-rpl.github.io/deoxys-docs/html/getting_started/overview.html), a controller library for Franka Emika Panda developed by [Yifeng Zhu](https://zhuyifengzju.github.io/).
+
+<br>
+
 ## Citation
 ```bibtex
 @inproceedings{liu2022robot,
