@@ -1,0 +1,257 @@
+{
+    "algo_name": "awac",
+    "experiment": {
+        "name": "awac_im_base",
+        "validate": false,
+        "logging": {
+            "terminal_output_to_txt": true,
+            "log_tb": true,
+	    "log_wandb": true
+        },
+        "save": {
+            "enabled": true,
+            "every_n_seconds": null,
+            "every_n_epochs": 200,
+            "epochs": [],
+            "on_best_validation": false,
+            "on_best_rollout_return": false,
+            "on_best_rollout_success_rate": true
+	},
+        "epoch_every_n_steps": 100,
+        "validation_epoch_every_n_steps": 10,
+        "env": null,
+        "additional_envs": null,
+        "render": false,
+        "render_video": false,
+        "keep_all_videos": false,
+        "video_skip": 5,
+        "rollout": {
+            "enabled": true,
+            "n": 80,
+            "horizon": 400,
+            "rate": 200,
+            "warmstart": 400,
+            "terminate_on_success": true
+        }
+    },
+    "train": {
+        "data": null,
+        "output_dir": null,
+        "preintv_relabeling": {},
+        "use_iwr_sampling": false,
+        "num_data_workers": 2,
+        "hdf5_cache_mode": "low_dim",
+        "hdf5_use_swmr": true,
+        "hdf5_normalize_obs": false,
+        "hdf5_filter_key": null,
+        "seq_length": 1,
+        "dataset_keys": [
+            "actions",
+            "rewards",
+            "dones",
+            "action_modes",
+            "intv_labels"
+	],
+        "goal_mode": null,
+        "cuda": true,
+        "batch_size": 16,
+        "num_epochs": 5000,
+        "seed": 1,
+	"num_eps": null,
+	"use_gripper_history": false
+    },
+    "algo": {
+        "optim_params": {
+            "actor": {
+                "learning_rate": {
+                    "initial": 0.0001
+                },
+                "regularization": {
+                    "L2": 1e-4
+                }
+            },
+            "critic": {
+                "learning_rate": {
+                    "initial": 0.0001
+                },
+                "regularization": {
+                    "L2": 0.00
+                }
+            }
+        },
+        "ignore_dones": false,
+        "discount": 0.99,
+        "target_tau": 0.005,
+        "actor": {
+            "layer_dims": [1024, 1024],
+            "res_mlp": {
+                "enabled": true
+            },
+            "net": {
+                "type": "gmm",
+                "common": {
+                    "use_tanh": false
+                }
+            },
+            "rnn": {
+	        "enabled": false,
+		"horizon": 10,
+                "hidden_dim": 1000,
+		"rnn_type": "LSTM",
+	    	"num_layers": 2,
+	    	"open_loop": false,
+		"use_res_mlp": false,
+		"res_mlp_kwargs": null,
+		"kwargs": {
+		    "bidirectional": false
+		}
+            }
+	},
+        "critic": {
+            "layer_dims": [1024, 1024],
+            "res_mlp": {
+                "enabled": true
+            },
+            "ensemble_method": "min",
+            "target_ensemble_method": "mean",
+            "distributional": {
+		"enabled": false,
+                "num_atoms": 51
+	    }
+	},
+        "adv": {
+            "beta": 1.0,
+            "clip_adv_value": null,
+            "filter_type": "softmax"
+        },
+        "hc_weights": {
+            "enabled": false,
+            "weight_key": null
+        }
+    },
+    "observation": {
+        "modalities": {
+            "obs": {
+                "low_dim": [
+                    "robot0_eef_pos",
+                    "robot0_eef_quat",
+                    "robot0_gripper_qpos"
+                ],
+                "rgb": [
+		    "agentview_image",
+		    "robot0_eye_in_hand_image"
+		],
+                "depth": [],
+                "scan": []
+            },
+            "goal": {
+                "low_dim": [],
+                "rgb": [],
+                "depth": [],
+                "scan": []
+            }
+        },
+        "encoder": {
+            "low_dim": {
+                "core_class": null,
+                "core_kwargs": {},
+                "obs_randomizer_class": null,
+                "obs_randomizer_kwargs": {}
+            },
+            "rgb": {
+                "core_class": "VisualCore",
+                "core_kwargs": {
+                    "feature_dimension": 64,
+                    "flatten": true,
+                    "backbone_class": "ResNet18Conv",
+                    "backbone_kwargs": {
+                        "pretrained": false,
+                        "input_coord_conv": false
+                    },
+                    "pool_class": "SpatialSoftmax",
+                    "pool_kwargs": {
+                        "num_kp": 32,
+                        "learnable_temperature": false,
+                        "temperature": 1.0,
+                        "noise_std": 0.0,
+                        "output_variance": false
+                    }
+                },
+                "obs_randomizer_class": "CropRandomizer",
+                "obs_randomizer_kwargs": {
+                    "crop_height": 76,
+                    "crop_width": 76,
+                    "num_crops": 1,
+                    "pos_enc": false
+                }
+            },
+            "depth": {
+                "core_class": "VisualCore",
+                "core_kwargs": {
+                    "feature_dimension": 64,
+                    "flatten": true,
+                    "backbone_class": "ResNet18Conv",
+                    "backbone_kwargs": {
+                        "pretrained": false,
+                        "input_coord_conv": false
+                    },
+                    "pool_class": "SpatialSoftmax",
+                    "pool_kwargs": {
+                        "num_kp": 32,
+                        "learnable_temperature": false,
+                        "temperature": 1.0,
+                        "noise_std": 0.0,
+                        "output_variance": false
+                    }
+                },
+                "obs_randomizer_class": null,
+                "obs_randomizer_kwargs": {
+                    "crop_height": 76,
+                    "crop_width": 76,
+                    "num_crops": 1,
+                    "pos_enc": false
+                }
+            },
+            "scan": {
+                "core_class": "ScanCore",
+                "core_kwargs": {
+                    "feature_dimension": 64,
+                    "flatten": true,
+                    "pool_class": "SpatialSoftmax",
+                    "pool_kwargs": {
+                        "num_kp": 32,
+                        "learnable_temperature": false,
+                        "temperature": 1.0,
+                        "noise_std": 0.0,
+                        "output_variance": false
+                    },
+                    "conv_activation": "relu",
+                    "conv_kwargs": {
+                        "out_channels": [
+                            32,
+                            64,
+                            64
+                        ],
+                        "kernel_size": [
+                            8,
+                            4,
+                            2
+                        ],
+                        "stride": [
+                            4,
+                            2,
+                            1
+                        ]
+                    }
+                },
+                "obs_randomizer_class": null,
+                "obs_randomizer_kwargs": {
+                    "crop_height": 76,
+                    "crop_width": 76,
+                    "num_crops": 1,
+                    "pos_enc": false
+                }
+            }
+        }
+    }
+}
