@@ -1,0 +1,6 @@
+@inproceedings{liu2022robot,
+    title = {Robot Learning on the Job: Human-in-the-Loop Autonomy and Learning During Deployment},
+    author = {Huihan Liu and Soroush Nasiriany and Lance Zhang and Zhiyao Bao and Yuke Zhu},
+    booktitle = {Robotics: Science and Systems (RSS)},
+    year = {2023}
+}
